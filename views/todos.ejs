@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/style.css" />
+    <title>Todos</title>
+  </head>
+  <body>
+    <!-- DATA GIVE TO EJS FILE -->
+    <!-- todos - list of all the todos -->
+    <!-- left  - how many incomplete todos there are -->
+
+    <h1>Current List</h1>
+
+    <h2>Left To Complete: <%= left %></h2>
+
+    <!-- <ul class="wrapper">
+      <% for(let i=0; i < todos.length; i++) {%>
+      <li class="item" data-id="<%=todos[i]._id%>">
+        <% if(todos[i].completed) {%>
+        <span class="item-info completed"><%= todos[i].todo %></span>
+        <% } else {%>
+        <span class="item-info"><%= todos[i].todo %></span>
+        <% } %>
+        <button class="remove">remove</button>
+      </li>
+      <% } %>
+    </ul> -->
+
+    <ul class="wrapper">
+      <% todos.forEach(todo => { %>
+      <li class="item" data-id="<%=todo._id%>">
+        <span class="item-info <%=todo.completed ? 'completed' : ''%>"
+          ><%= todo.todo %></span
+        >
+        <button class="remove">remove</button>
+      </li>
+      <% }) %>
+    </ul>
+
+    <!-- Due to being on todos route -->
+    <!-- Need to append /todos -->
+    <!-- Actual action is createTodo -->
+    <!-- full action: /todos/createTodo -->
+    <h2>Add:</h2>
+    <form action="/todos/createTodo" method="POST">
+      <input type="text" placeholder="Add your new todo" name="todoItem" />
+      <input type="submit" />
+    </form>
+
+    <!-- js / eventlistener for DELETE, PUT-->
+    <script src="js/main.js"></script>
+  </body>
+</html>
